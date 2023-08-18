@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # _printf
 _printf is a simple custom printf function that formats and prints data to the standard output.
 # Description
@@ -42,3 +43,6 @@ int main(void)
 ```
 # Copyright
 Copyright (c)2023 Olayiwola Yunus Abayomi (yuntech) ,abdulkabir musa
+=======
+0x11 C-printf
+>>>>>>> 7056b85bde5d22755eb2934aae8a3ef41779a603

@@ -40,4 +40,4 @@ printed not counting \\o for the string.
 # BUGS
 None yet!
 # SEE ALSO
-printf(3)*
+printf(3) *
