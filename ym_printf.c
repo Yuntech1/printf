@@ -3,55 +3,44 @@
 #include <stdlib.h>
 
 /**
- * _printf - function that produces output according to a format
- * @format: pointer to string format
- *
- * Return: strings to the standard output
- */
+* _printf - same funcction as using printf, this is user-defined
+* @format: format with specifiers
+* Return: returns the number of string printed
+*/
+
 int _printf(const char *format, ...)
 {
-	int count;
 	va_list args;
+	int count = 0;
 
-	count = 0;
 	va_start(args, format);
+	if (format == NULL)
+		return (count);
 	while (*format != '\0')
 	{
 		if (*format == '%')
 		{
 			format++;
-			if (*format == 'c')
-			{
-				int c = va_arg(args, int);
-
-				write(1, &c, 1);
-				count++;
-			}
-			else if (*format == 's')
-			{
-				char *s = va_arg(args, char *);
-
-				write(1, s, strlen(s));
-				count += strlen(s);
-			}
+			if (*format == 'c' || *format == '%')
+				count += *format == 'c' ? _putchar(va_arg(args, int)) : _putchar(*format);
+			else if (*format == 's' || *format == 'S')
+				count += handle_s(*format, va_arg(args, char *));
 			else if (*format == 'd' || *format == 'i')
-			{
-				int d = va_arg(args, int);
-				char buffer[20];
-				int len = snprintf(buffer, sizeof(buffer), "%d", d);
-
-				write(1, buffer, len);
-				count += len;
-			}
-			else if (*format == '%')
-			{
-				write(1, "%", 1);
-				count++;
-			}
+				count += handle_d(va_arg(args, int));
+			else if (*format == 'u' || *format == 'o')
+				count += handle_u(*format, va_arg(args, unsigned int));
+			else if (*format == 'b')
+				count += handle_bin(va_arg(args, unsigned int));
+			else if (*format == 'r' || *format == 'R')
+				count += handle_r(*format, va_arg(args, char *));
+			else if (*format == 'x' || *format == 'X')
+				count += dec_to_hex(*format, va_arg(args, int));
+			else
+				count += handle_non_spec(*format);
 		}
 		else
 		{
-			write(1, format, 1);
+			_putchar(*format);
 			count++;
 		}
 		format++;
