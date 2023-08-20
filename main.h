@@ -1,9 +1,10 @@
 #ifndef MAIN_H
 #define MAIN_H
 #include <stdarg.h>
-#include <stdio.h>
 #include <string.h>
 #include <unistd.h>
+#include <stddef.h>
+
 int _printf(const char *format, ...);
 int _putchar(int c);
 char *_int_to_str(int num);
